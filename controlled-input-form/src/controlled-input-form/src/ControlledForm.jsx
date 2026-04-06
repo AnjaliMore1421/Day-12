@@ -1,24 +1,32 @@
+// Import React and useState hook
 import React, { useState } from "react";
 
+// Functional component for controlled form
 function ControlledForm() {
+
+  // State to store form input values
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: ""
   });
 
+  // Function to handle input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Update only the changed field
     setFormData({
       ...formData,
       [name]: value
     });
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page refresh
 
+    // Show submitted data in alert box
     alert(
       `Submitted Successfully!\n\nName: ${formData.name}\nEmail: ${formData.email}`
     );
@@ -34,9 +42,14 @@ function ControlledForm() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
+
+        {/* Form heading */}
         <h2 style={styles.heading}>Registration Form</h2>
 
+        {/* Form starts */}
         <form onSubmit={handleSubmit} style={styles.form}>
+
+          {/* Name input field */}
           <input
             type="text"
             name="name"
@@ -47,6 +60,7 @@ function ControlledForm() {
             required
           />
 
+          {/* Email input field */}
           <input
             type="email"
             name="email"
@@ -57,6 +71,7 @@ function ControlledForm() {
             required
           />
 
+          {/* Password input field */}
           <input
             type="password"
             name="password"
@@ -67,6 +82,7 @@ function ControlledForm() {
             required
           />
 
+          {/* Submit button */}
           <button type="submit" style={styles.button}>
             Submit
           </button>
@@ -76,6 +92,7 @@ function ControlledForm() {
   );
 }
 
+// Inline styling object
 const styles = {
   container: {
     height: "100vh",
@@ -117,4 +134,5 @@ const styles = {
   }
 };
 
+// Export component
 export default ControlledForm;
