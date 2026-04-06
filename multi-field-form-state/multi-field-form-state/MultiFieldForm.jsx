@@ -1,6 +1,10 @@
+// Import React and useState hook
 import React, { useState } from "react";
 
+// Functional component for multi-field form
 function MultiFieldForm() {
+
+  // Initial state object for all form fields
   const initialState = {
     fullName: "",
     email: "",
@@ -10,29 +14,38 @@ function MultiFieldForm() {
     message: ""
   };
 
+  // State to store form data
   const [formData, setFormData] = useState(initialState);
+
+  // State to show success message after submit
   const [submitted, setSubmitted] = useState(false);
 
+  // Function to handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Update only the changed field using spread operator
     setFormData((prevData) => ({
       ...prevData,
       [name]: value
     }));
 
+    // Hide success message while editing again
     setSubmitted(false);
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
+    e.preventDefault(); // Prevent page refresh
+    setSubmitted(true); // Show success message
 
+    // Clear form after 1 second
     setTimeout(() => {
       setFormData(initialState);
     }, 1000);
   };
 
+  // Function to clear form manually
   const handleClear = () => {
     setFormData(initialState);
     setSubmitted(false);
@@ -41,9 +54,14 @@ function MultiFieldForm() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
+        
+        {/* Form heading */}
         <h2 style={styles.heading}>User Registration Form</h2>
 
+        {/* Form starts */}
         <form onSubmit={handleSubmit} style={styles.form}>
+          
+          {/* Full name input */}
           <input
             type="text"
             name="fullName"
@@ -54,6 +72,7 @@ function MultiFieldForm() {
             required
           />
 
+          {/* Email input */}
           <input
             type="email"
             name="email"
@@ -64,6 +83,7 @@ function MultiFieldForm() {
             required
           />
 
+          {/* Phone number input */}
           <input
             type="tel"
             name="phone"
@@ -74,6 +94,7 @@ function MultiFieldForm() {
             required
           />
 
+          {/* City input */}
           <input
             type="text"
             name="city"
@@ -84,6 +105,7 @@ function MultiFieldForm() {
             required
           />
 
+          {/* Gender dropdown */}
           <select
             name="gender"
             value={formData.gender}
@@ -97,6 +119,7 @@ function MultiFieldForm() {
             <option>Other</option>
           </select>
 
+          {/* Message textarea */}
           <textarea
             name="message"
             placeholder="Write your message..."
@@ -105,11 +128,15 @@ function MultiFieldForm() {
             style={styles.textarea}
           />
 
+          {/* Buttons container */}
           <div style={styles.buttonContainer}>
+            
+            {/* Submit button */}
             <button type="submit" style={styles.submitButton}>
               Submit
             </button>
 
+            {/* Clear button */}
             <button
               type="button"
               onClick={handleClear}
@@ -120,10 +147,12 @@ function MultiFieldForm() {
           </div>
         </form>
 
+        {/* Success message after submit */}
         {submitted && (
           <p style={styles.success}>Form submitted successfully ✅</p>
         )}
 
+        {/* Live preview section */}
         <div style={styles.preview}>
           <h3>Live Preview</h3>
           <p><strong>Name:</strong> {formData.fullName}</p>
@@ -138,6 +167,7 @@ function MultiFieldForm() {
   );
 }
 
+// Styling object for inline CSS
 const styles = {
   container: {
     minHeight: "100vh",
@@ -213,4 +243,5 @@ const styles = {
   }
 };
 
+// Export component
 export default MultiFieldForm;
